@@ -1,13 +1,26 @@
 document.querySelector(".plus").addEventListener("click", function () {
-  let title = prompt("Please enter the task name");
-  let time = prompt("Enter the time when you want to start it (e.g., 9.00 PM)");
-  let date = prompt("Enter the date (e.g., 25/8/2024)");
-  let day = prompt("Enter the day when you want to complete it (e.g., Sunday)");
+  document.getElementById("taskForm").style.display = "block";
+});
 
+document.getElementById("newTaskForm").addEventListener("submit", function (event) {
+  event.preventDefault(); // Prevent form submission
+
+  // Get values from the form inputs
+  let title = document.getElementById("taskTitle").value;
+  let time = document.getElementById("taskTime").value;
+  let date = document.getElementById("taskDate").value;
+  let day = document.getElementById("taskDay").value;
+
+  // Call the function to add the task card
   addTask(title, time, date, day);
 
-  function addTask(title, time, date, day) {
-    let html = `
+  // Reset form and hide it
+  document.getElementById("newTaskForm").reset();
+  document.getElementById("taskForm").style.display = "none";
+});
+
+function addTask(title, time, date, day) {
+  let html = `
     <div class="task">
       <div class="title">
         <h2>${title}</h2>
@@ -25,6 +38,5 @@ document.querySelector(".plus").addEventListener("click", function () {
       </div>
     </div>`;
 
-    document.querySelector(".content").innerHTML += html;
-  }
-});
+  document.querySelector(".content").innerHTML += html;
+}
